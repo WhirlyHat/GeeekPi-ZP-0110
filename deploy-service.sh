@@ -75,7 +75,7 @@ add-service() {
     create-unit
 
     # Set the python file to executable
-    sudo chmod +x ${EXE_PATH} &> /dev/null || echo "Setting chmod failed"
+    sudo chmod +x ${EXE_PATH} &> /dev/null || error-exit "Failed to set file permissions: ${EXE_PATH}"
 
     # Reload and reset systemd
     echo "Reloading systemd daemon..."
