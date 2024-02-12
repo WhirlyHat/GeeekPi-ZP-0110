@@ -34,6 +34,8 @@ if __name__ == '__main__':
     # Validate the ON and OFF thresholds
     if OFF_THRESHOLD >= ON_THRESHOLD:
         raise RuntimeError('OFF_THRESHOLD must be less than ON_THRESHOLD')
+    else:
+        print("\nPress CTRL + C to quit \n")
     
     try:
         while True:
@@ -57,7 +59,8 @@ if __name__ == '__main__':
 
             time.sleep(SLEEP_INTERVAL)
     except KeyboardInterrupt:
-        print("Stopping service...")
+        print("\nStopping service...")
         pwm.stop()
         print("Performing resource cleanup...")
         GPIO.cleanup() # Free up any resources used and return all channels back to safe defaults
+        print("Done")
