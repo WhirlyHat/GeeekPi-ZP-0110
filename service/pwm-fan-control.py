@@ -5,15 +5,15 @@ import time
 import subprocess
 
 ################################################################
-ON_THRESHOLD = 36 # Celsius degrees when fan turns ON
-OFF_THRESHOLD = 34 # Celsius degrees when fan turns OFF
-SLEEP_INTERVAL = 7 # Seconds between core temperature polling
+ON_THRESHOLD = 40 # Celsius degrees when fan turns ON
+OFF_THRESHOLD = 36 # Celsius degrees when fan turns OFF
+SLEEP_INTERVAL = 10 # Seconds between core temperature polling
 GPIO_PIN = 14 # GPIO pin used to control the fan
 PWM_FREQ = 100 # PWM frequency in Hertz
 PWM_MAX = 100 # PWM duty cycle MAXIMUM
 PWM_MIN = 0 # PWM duty cycle MINIMUM
 ################################################################
-fanState = 0 # Boolean value to track the fan's state (on/off)
+fanState = 0 # String value to track the fan's state (on/off)
 ################################################################
 GPIO.setmode(GPIO.BCM) # Broadcom SOC channel names
 GPIO.setwarnings(False) # Suppress "RuntimeWarning: This channel is already in use"
@@ -40,22 +40,38 @@ if __name__ == '__main__':
     try:
         while True:
             celsius = get_celsius()
-            # Display temperature and fan state message depending on fan state
-            if fanState == 1:
-                print("Temperature: " + str(celsius) + "C ---- Fan State: ON (Active Cooling)")
-            else:
-                print("Temperature: " + str(celsius) + "C ---- Fan State: OFF (Passive Cooling)")
+            # Display temperature and fan state message
+            print(\
+                "Current Temp: " + str(celsius) + "C"\
+                " -- "\
+                "Upper: " + ON_THRESHOLD + "C"\
+                " / "\
+                "Lower: " + OFF_THRESHOLD + "C"\
+                " -- "\
+                "Fan: " + fanState \
+            )
 
             # Start fan if upper threshold reached AND fan is NOT already running.
-            if celsius > ON_THRESHOLD and fanState == 0:
+            if celsius > ON_THRESHOLD and fanState == "OFF":
                 pwm.ChangeDutyCycle(PWM_MAX)
-                print("UPPER threshold reached - fan switched -ON-")
-                fanState = 1
+                fanState = "ON"
+                print(\
+                    "Temp " + celsius + "C "\
+                    "exceeded " + ON_THRESHOLD + "C upper threshold"\
+                    " -- "\
+                    "Switching to Active Cooling"\
+                )
+                
             # Stop fan if lower threshold reached AND fan is running.
-            elif celsius < OFF_THRESHOLD and fanState == 1:
+            elif celsius < OFF_THRESHOLD and fanState == "ON":
                 pwm.ChangeDutyCycle(PWM_MIN)
-                print("LOWER threshold reached - fan switched -OFF-")
-                fanState = 0
+                fanState = "OFF"
+                print(\
+                    "Temp " + celsius + "C "\
+                    "reached " + OFF_THRESHOLD + "C lower threshold"\
+                    " -- "\
+                    "Switching to Passive Cooling"\
+                )
 
             time.sleep(SLEEP_INTERVAL)
     except KeyboardInterrupt:
