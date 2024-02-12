@@ -2,7 +2,7 @@
 The project contains scripts to configure and control the GeeekPi ZP-0110 heatsink with fan
 for use with Raspberry Pi 4B single board computers (SBC).
 
-Automatic fan control is enabled with the raspi-config utility however it ONLY supports the
+Automatic fan control is enabled with the ```raspi-config``` utility however it ONLY supports the
 Raspberry Pi OS.  For other OS (e.g., Ubuntu) a python script will need to be used to automatically control the fan when the temperature threshold is reached.
 
 Follow the instructions provided by GeeekPi to enable fan control on Raspberry Pi OS. For product details or a sample Python script you can refer to the 52pi.com wiki page at: https://wiki.52pi.com/index.php/ZP-0110
