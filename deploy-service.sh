@@ -74,6 +74,9 @@ add-service() {
     # Create service unit file
     create-unit
 
+    # Set the python file to executable
+    sudo chmod +x ${EXE_PATH} &> /dev/null || echo "Setting chmod failed"
+
     # Reload and reset systemd
     echo "Reloading systemd daemon..."
     systemctl --quiet daemon-reload &> /dev/null || error-exit "Unable to reload systemd."
