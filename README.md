@@ -18,16 +18,25 @@ sudo usermod -aG i2c someacct
 ```
 
 ## Add the Automated Script:
-** Change to the /opt directory that is used for installing third-party (non-standard) software.
-
-
-
-### Enable fan control and temperature threshold
-**Add the following to the /boot/config.txt file**
-```bash
-dtoverlay=gpio-fan,gpiopin=14,temp=60000
+**Change to the **/opt** directory that is used for installing third-party (non-standard) software.**
 ```
-**_Note: Temperature is measured in millicelsius. The fan turns off when the temperature falls by 10℃._**
+cd /opt
+```
+
+**Clone the GeeekPi-ZP-0110 Github repository.**
+```
+git clone https://github.com/WhirlyHat/GeeekPi-ZP-0110.git
+```
+
+**Run the deployment script using _sudo_.**
+```
+sudo bash ./GeeekPi-ZP-0110/deploy-service.sh
+```
+
+**Answer the questions to continue the installation**
+
+**_Note: Temperature is measured in Celsius by default. The fan turns off when the temperature falls by 10℃._**
+
 
 **Reboot the system.**
 ```bash
