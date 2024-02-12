@@ -5,9 +5,8 @@ SCRIPT_FULLPATH="$(realpath $0)"
 SCRIPT_DIR="$(dirname "${SCRIPT_FULLPATH}")"
 ################################################################
 SVC_DIR="/etc/systemd/system/"
-SVC_BASE="pwm-fan-control"
-SVC_NAME="${SVC_BASE}.service"
-EXE_PATH="${SCRIPT_DIR}/service/${SVC_BASE}.py"
+SVC_NAME="pwm-fan-control.service"
+EXE_PATH="${SCRIPT_DIR}/service/pwm-fan-control.py"
 ################################################################
 
 # TEST VARIABLES
@@ -17,7 +16,6 @@ EXE_PATH="${SCRIPT_DIR}/service/${SVC_BASE}.py"
 #echo "Script full path : $SCRIPT_FULLPATH"
 #echo "Script directory : $SCRIPT_DIR"
 #echo "Service directory: $SVC_DIR"
-#echo "Service base name: $SVC_BASE"
 #echo "Service name     : $SVC_NAME"
 #echo "Target executable: $EXE_PATH"
 #echo ""
@@ -32,7 +30,7 @@ error-exit() {
 create-unit() {
     # echo "create-unit function:" # Commented out ; Used to troubleshoot
     echo "Creating a new service unit: ${SVC_DIR}${SVC_NAME}"
-    cat <<EOF 
+    cat <<EOF | sudo tee "${SVC_DIR}${SVC_NAME}" &> /dev/null 
 [Unit]
 Description=PWM Fan Control
 After=multi-user.target
