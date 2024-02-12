@@ -13,7 +13,7 @@ PWM_FREQ = 100 # PWM frequency in Hertz
 PWM_MAX = 100 # PWM duty cycle MAXIMUM
 PWM_MIN = 0 # PWM duty cycle MINIMUM
 ################################################################
-fanState = 0 # String value to track the fan's state (on/off)
+fanState = "OFF" # String value to track the fan's state (on/off)
 ################################################################
 GPIO.setmode(GPIO.BCM) # Broadcom SOC channel names
 GPIO.setwarnings(False) # Suppress "RuntimeWarning: This channel is already in use"
