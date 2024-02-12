@@ -14,6 +14,7 @@ PWM_MAX = 100 # PWM duty cycle MAXIMUM
 PWM_MIN = 0 # PWM duty cycle MINIMUM
 ################################################################
 GPIO.setmode(GPIO.BCM) # Broadcom SOC channel names
+GPIO.setwarnings(False) # Suppress "RuntimeWarning: This channel is already in use"
 GPIO.setup(GPIO_PIN,GPIO.OUT) # Configure output channel
 pwm = GPIO.PWM(GPIO_PIN,PWM_FREQ) # Create PWM instance
 pwm.start(PWM_MIN) # Set initial PWM state
