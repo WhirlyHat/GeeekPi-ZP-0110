@@ -8,11 +8,11 @@ Raspberry Pi OS.  For other OS (e.g., Ubuntu) a python script will need to be us
 Follow the instructions provided by GeeekPi to enable fan control on Raspberry Pi OS. For product details or a sample Python script you can refer to the 52pi.com wiki page at: https://wiki.52pi.com/index.php/ZP-0110
 
 ## Prerequisites:
->Install the Python and i2c packages using the command below:
+**Install the Python and i2c packages using the command below:**
 ```
 sudo apt install -y python3-pip python3-dev python3-pil python3-setuptools python3-rpi.gpio i2c-tools
 ```
->Add the user account to the i2c group.
+**Add the user account to the i2c group.**
 ```
 sudo usermod -aG i2c someacct
 ```
@@ -25,7 +25,7 @@ cd /opt
 
 **Clone the GeeekPi-ZP-0110 Github repository.**
 ```
-git clone https://github.com/WhirlyHat/GeeekPi-ZP-0110.git
+git clone https://www.github.com/WhirlyHat/GeeekPi-ZP-0110.git
 ```
 
 **Run the deployment script using ```sudo```.**
@@ -51,11 +51,28 @@ Service pwm-fan-control.service successfully enabled and started!
 systemctl status pwm-fan-control
 ```
 
-
-**_Note: Temperature is measured in Celsius by default. The fan turns off when the temperature falls by 10℃._**
-
-
 **Reboot the system.**
-```bash
+```
 sudo reboot now
 ```
+
+## Customize the Triggers and Polling Interval:
+Modify the following three variables in the ```/service/pwm-fan-control.py``` python file to specify when the fan turns on/off and how frequently the script checks the temperature.  _Note: Temperatures are measured in Celsius by default._
+
+>Celsius degrees when the fan turns ON:
+```
+ON_THRESHOLD  = <integer>
+```
+
+>
+>Celsius degrees when the fan turns OFF:
+```
+OFF_THRESHOLD = <integer>
+```
+
+>
+>Seconds to wait until the next core temperature polling:
+```
+SLEEP_INTERVAL = <integer>
+```
+
