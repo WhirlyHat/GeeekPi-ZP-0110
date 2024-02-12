@@ -43,11 +43,11 @@ if __name__ == '__main__':
             # Display temperature and fan state message
             print(\
                 "Current Temp: " + str(celsius) + "C"\
-                " -- "\
+                " --- "\
                 "Upper: " + str(ON_THRESHOLD) + "C"\
-                " / "\
+                " --- "\
                 "Lower: " + str(OFF_THRESHOLD) + "C"\
-                " -- "\
+                " --- "\
                 "Fan: " + fanState \
             )
 
@@ -56,10 +56,9 @@ if __name__ == '__main__':
                 pwm.ChangeDutyCycle(PWM_MAX)
                 fanState = "ON"
                 print(\
-                    "Temp " + str(celsius) + "C "\
-                    "exceeded " + str(ON_THRESHOLD) + "C upper threshold"\
-                    " -- "\
-                    "Switching to Active Cooling"\
+                    "** Exceeded upper threshold **"\
+                    " --- "\
+                    "switching to ACTIVE Cooling"\
                 )
                 
             # Stop fan if lower threshold reached AND fan is running.
@@ -67,10 +66,9 @@ if __name__ == '__main__':
                 pwm.ChangeDutyCycle(PWM_MIN)
                 fanState = "OFF"
                 print(\
-                    "Temp " + str(celsius) + "C "\
-                    "reached " + str(OFF_THRESHOLD) + "C lower threshold"\
-                    " -- "\
-                    "Switching to Passive Cooling"\
+                    "** Reached lower threshold **"\
+                    " --- "\
+                    "switching to PASSIVE Cooling"\
                 )
 
             time.sleep(SLEEP_INTERVAL)
