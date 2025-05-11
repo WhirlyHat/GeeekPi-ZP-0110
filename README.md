@@ -57,8 +57,6 @@ sudo reboot now
 ```
 
 ## Customize the Triggers and Polling Interval:
-**VERSION 2:**
-
 Modify the line below in the ```/service/pwm-fan-control.py``` python file to specify when the fan turns on/off and how frequently the script checks the temperature.  The default values are used if no values are specified for the FanControlService constructor.
 _Note: Temperatures are measured in Celsius by default._
 ```
@@ -80,25 +78,3 @@ off_threshold = <integer>
 ```
 sleep_interval = <integer>
 ```
-
-**VERSION 1:**
-
-Modify the following three variables in the ```/service/version_1/pwm-fan-control.py``` python file to specify when the fan turns on/off and how frequently the script checks the temperature.  _Note: Temperatures are measured in Celsius by default._
-
->Celsius degrees when the fan turns ON:
-```
-ON_THRESHOLD  = <integer>
-```
-
->
->Celsius degrees when the fan turns OFF:
-```
-OFF_THRESHOLD = <integer>
-```
-
->
->Seconds to wait until the next core temperature polling:
-```
-SLEEP_INTERVAL = <integer>
-```
-
