@@ -4,9 +4,11 @@
 Please include a summary of the changes and the related issue. 
 
 ## Type of Change
-- [ ] Bugfix
 - [ ] New feature
+- [ ] Bug fix (not in production)
+- [ ] Patch (in production)
 - [ ] Breaking change
+- [ ] Release
 - [ ] Documentation update
 - [ ] Other (please specify)
 
